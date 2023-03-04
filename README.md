@@ -30,6 +30,8 @@ docker compose -f docker-compose-dev.yml up
 make run-dev
 ```
 
+This starts the server at [http://localhost](http://localhost).
+
 ## Setup database with initial data
 This creates sample users on database.
 
