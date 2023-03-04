@@ -5,8 +5,7 @@ services:
     container_name: fastapi_sample_server
     build: ./backend
     restart: always
-    #command: "sh -c 'alembic upgrade head && uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000'"
-    command: "sh -c 'uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000'"
+    command: "sh -c 'alembic upgrade head && uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000'"
     volumes:
       - ./backend/app:/code
     expose:

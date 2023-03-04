@@ -1,6 +1,5 @@
 from typing import List
 from fastapi import APIRouter, Query
-from fastapi_cache.decorator import cache
 from typing import Dict
 from asyncer import asyncify, create_task_group, syncify
 from app.core.config import settings
@@ -16,6 +15,7 @@ def get_weather_sync(city: str):
     """
     Gets weather by goweather API with sync client
     """
+    print("settings.WHEATER_URL", settings.WHEATER_URL)
     response = httpx.get(f"{settings.WHEATER_URL}/{city}?format=j1")
     weather = response.json()
     weather["city"] = city
@@ -26,6 +26,7 @@ async def get_weather_async(city: str):
     """
     Gets weather by goweather API with async client
     """
+    print("settings.WHEATER_URL", settings.WHEATER_URL)
     async with httpx.AsyncClient() as client:
         response = await client.get(f"{settings.WHEATER_URL}/{city}?format=j1")
         weather = response.json()
@@ -43,7 +44,6 @@ def do_sync_work(city: str):
 
 
 @router.get("/weather_sync/sync1")
-@cache(expire=10)
 async def get_weather_sync_work_by_city(
     city: str = Query(default="Quito"),
 ) -> IGetResponseBase:
@@ -57,7 +57,6 @@ async def get_weather_sync_work_by_city(
 
 
 @router.get("/weather_sync/sync2")
-@cache(expire=10)
 async def get_weather_sync_client_by_city(
     city: str = Query(default="Quito"),
 ) -> IGetResponseBase:
@@ -71,7 +70,6 @@ async def get_weather_sync_client_by_city(
 
 
 @router.get("/weather_async")
-@cache(expire=10)
 async def get_weather_async_client_by_city(
     city: str = Query(default="Quito"),
 ) -> IGetResponseBase:
@@ -85,7 +83,6 @@ async def get_weather_async_client_by_city(
 
 
 @router.get("/weather_async_list/sequencial")
-@cache(expire=10)
 async def get_weather_async_sequencial_by_cities(
     cities: List[str] = Query(default=["Quito", "Miami", "Barcelona"]),
 ) -> IGetResponseBase:
@@ -104,7 +101,6 @@ async def get_weather_async_sequencial_by_cities(
 
 
 @router.get("/weather_async_list/concurrent")
-@cache(expire=10)
 async def get_weather_async_concurrent_by_cities(
     cities: List[str] = Query(default=["Quito", "Miami", "Barcelona"]),
 ) -> IGetResponseBase:
