@@ -30,7 +30,7 @@ docker compose -f docker-compose-dev.yml up
 make run-dev
 ```
 
-This starts the server at [http://localhost](http://localhost).
+This starts the server at [http://localhost](http://localhost) using nginx as reverse proxy. If you want a direct connection bypassing the proxy, you can use this url [http://localhost:8000](http://localhost:8000).
 
 ## Setup database with initial data
 This creates sample users on database.
