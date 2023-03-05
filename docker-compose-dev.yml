@@ -1,6 +1,16 @@
 version: '3.8'
 
 services:
+  rust.server:
+    build:
+      context: ./rust.server
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ./rust.server/src:/app/src
+    ports:
+      - "8001:3001"
+
   fastapi_sample_server:
     container_name: fastapi_sample_server
     build: ./backend
@@ -34,7 +44,7 @@ services:
       - POSTGRES_DATABASE=${DATABASE_NAME}
       - POSTGRES_HOST_AUTH_METHOD= "trust"
       - POSTGRESQL_POSTGRES_PASSWORD= ${DATABASE_PASSWORD}
-      
+
   nginx:
     container_name: nginx_sample
     restart: unless-stopped

@@ -141,4 +141,5 @@ sonarqube/extensions
 sonarqube/data
 sonarqube/logs
 
-.terraform
+.terraform.idea
+.idea
