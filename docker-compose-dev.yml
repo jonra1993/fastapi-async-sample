@@ -9,7 +9,7 @@ services:
     volumes:
       - ./rust.server/src:/app/src
     ports:
-      - "8001:3001"
+      - "8888:8888"
 
   fastapi_sample_server:
     container_name: fastapi_sample_server

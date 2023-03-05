@@ -6,7 +6,7 @@ use unsaferust::services::postgres::PostgresService;
 #[tokio::main]
 async fn main() {
     // Prepare the variables that the run method needs.
-    let serverPort = std::env::var("SERVER_PORT").unwrap_or_else(|_| "3001".to_string());
+    let serverPort = std::env::var("SERVER_PORT").unwrap_or_else(|_| "8888".to_string());
     let databaseService = PostgresService::new(None).await;
 
     // truncate users
