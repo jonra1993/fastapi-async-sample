@@ -5,7 +5,6 @@ pub mod services;
 pub mod models;
 pub mod utils;
 
-
 use crate::{
     services::{postgres::PostgresService},
 };

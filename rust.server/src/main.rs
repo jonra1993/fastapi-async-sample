@@ -1,7 +1,7 @@
 #![allow(non_snake_case)]
 
 use std::net::TcpListener;
-use unsaferust::services::postgres::PostgresService;
+use rustserver::services::postgres::PostgresService;
 
 #[tokio::main]
 async fn main() {
@@ -41,8 +41,8 @@ async fn main() {
     let address = format!("0.0.0.0:{}", serverPort);
     let listener = TcpListener::bind(&address).expect("TcpListener failed");
     println!("Listening at: {}", &address);
-    unsaferust::run(listener, databaseService)
-        .expect("unsaferust::run failed")
+    rustserver::run(listener, databaseService)
+        .expect("rustserver::run failed")
         .await
         .expect("axum::Server failed");
 }

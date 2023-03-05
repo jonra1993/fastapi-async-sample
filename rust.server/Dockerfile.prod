@@ -28,7 +28,7 @@ RUN apt-get update \
 
 # Todo: Delete this when done.
 COPY data/* /app/data/
-COPY --from=builder /app/target/release/unsaferust /app
+COPY --from=builder /app/target/release/rustserver /app
 
 ARG SERVER_PORT
 ENV SERVER_PORT=$SERVER_PORT
@@ -37,4 +37,4 @@ ENV DATABASE_URL=$DATABASE_URL
 ARG DB_MAX_CONNECTIONS
 ENV DB_MAX_CONNECTIONS=$DB_MAX_CONNECTIONS
 
-ENTRYPOINT ["/app/unsaferust"]
+ENTRYPOINT ["/app/rustserver"]
