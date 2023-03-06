@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     DATABASE_NAME: str    
     DB_POOL_SIZE = 100
     WEB_CONCURRENCY = 20
-    POOL_SIZE = max(DB_POOL_SIZE // WEB_CONCURRENCY, 5)
+    POOL_SIZE = 16
     ASYNC_DATABASE_URI: Optional[str]
     @validator("ASYNC_DATABASE_URI", pre=True)
     def assemble_db_connection(cls, v: Optional[str], values: Dict[str, Any]) -> Any:
