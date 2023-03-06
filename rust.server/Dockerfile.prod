@@ -12,29 +12,20 @@ FROM chef AS builder
 COPY --from=planner /app/recipe.json recipe.json
 RUN cargo chef cook --release --recipe-path recipe.json
 COPY . .
-RUN cargo build --release
+RUN cargo update && cargo build --release
 
 
 FROM debian:bullseye-slim AS prod
-# Is workdir needed?
 WORKDIR app
-# I need the following to run the app.
-RUN apt-get update \
-    && apt-get install -y \
-    git \
-    grep \
-    cloc \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && rm -rf /var/lib/apt/lists/*
 
-# Todo: Delete this when done.
-COPY data/* /app/data/
 COPY --from=builder /app/target/release/rustserver /app
 
-ARG SERVER_PORT
-ENV SERVER_PORT=$SERVER_PORT
-ARG DATABASE_URL
-ENV DATABASE_URL=$DATABASE_URL
-ARG DB_MAX_CONNECTIONS
-ENV DB_MAX_CONNECTIONS=$DB_MAX_CONNECTIONS
+#ARG SERVER_PORT
+#ENV SERVER_PORT=$SERVER_PORT
+#ARG DATABASE_URL
+#ENV DATABASE_URL=$DATABASE_URL
+#ARG DB_MAX_CONNECTIONS
+#ENV DB_MAX_CONNECTIONS=$DB_MAX_CONNECTIONS
 
 ENTRYPOINT ["/app/rustserver"]

@@ -1,5 +1,3 @@
-use uuid::Uuid;
-
 pub mod configuration;
 
 #[derive(serde::Serialize, serde::Deserialize, Debug, Clone)]
