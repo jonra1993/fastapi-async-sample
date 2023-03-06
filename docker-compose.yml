@@ -1,6 +1,16 @@
 version: '3.8'
 
 services:
+  rust.server:
+    build:
+      context: ./rust.server
+      dockerfile: Dockerfile.prod
+    restart: unless-stopped
+    volumes:
+      - ./rust.server/src:/app/src
+    ports:
+      - "8888:8888"
+
   fastapi_sample_server:
     container_name: fastapi_sample_server
     build: ./backend

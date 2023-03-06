@@ -1,5 +1,6 @@
 use crate::models::{configuration::DatabaseSettings, User};
-use sqlx::{postgres::PgPoolOptions, PgPool};
+use sqlx::{postgres::PgPoolOptions, PgPool, Row};
+use uuid::Uuid;
 
 #[derive(Clone)]
 pub struct PostgresService {
@@ -47,9 +48,20 @@ impl PostgresService {
     }
 
     pub async fn getUsers(&self) -> Result<Vec<crate::models::User>, sqlx::Error> {
-        let users: Vec<User> = sqlx::query_as("select * from \"User\"")
+        let rows = sqlx::query("select * from \"User\"")
             .fetch_all(&self.connection)
             .await?;
+        let users = rows.iter().map(|row| {
+            let _id: Uuid = row.get("id");
+            let id: String = format!("{}", _id);
+            let framework: String = row.get("framework");
+            let first_name: String = row.get("first_name");
+            let last_name: String = row.get("last_name");
+            let email: String = row.get("email");
+            let user = User::new(id, framework, first_name, last_name, None, email);
+            return user;
+        }).collect();
+        
         return Ok(users);
     }
 }
