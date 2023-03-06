@@ -142,3 +142,4 @@ sonarqube/data
 sonarqube/logs
 
 .terraform
+.idea
