@@ -1,6 +1,6 @@
 # FastAPI Async Sample
 
-This is a project template which uses [FastAPI](https://fastapi.tiangolo.com/), PostgreSQL database and async [SQLModel](https://sqlmodel.tiangolo.com/) as ORM.
+This is a project template which uses [FastAPI](https://fastapi.tiangolo.com/), PostgreSQL database and async [SQLModel](https://sqlmodel.tiangolo.com/) as ORM. This sample was designed to create a [Benchmark](https://youtu.be/dsdFx6AQ-1o) of Fastapi and Rust when they get data from a database. You can check the results in the channel of [Vagelis Prokopiou](https://www.youtube.com/@Vagelis_Prokopiou).
 
 ## Set environment variables
 
